@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import './App.css';
 /* use uppercase names to differentiate from JSX tags */
 import Person from './Person/Person';
+
 
 /* components names by convention srart with uppercase */
 class App extends Component {
@@ -70,7 +72,8 @@ class App extends Component {
     /* inline styles, scoped to the component in which used */
     const style = {
       /* this is a representation of CSS in JS */
-      backgoroundColor: 'aqua',
+      backgoroundColor: 'green',
+      color: 'black',
       font: 'inherit',
       border: '1px solid black',
       padding: '8px',
@@ -99,7 +102,18 @@ class App extends Component {
             })
         }
         </div>
-      )
+      );
+
+      style.backgoroundColor = 'red';
+    }
+
+    /* dynamic styling */
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     /* use () to write multiline JSX */
@@ -107,6 +121,7 @@ class App extends Component {
       /* only one root element */
       <div className="App">
         <h1>Florian is building another React App!</h1>
+        <p className={classes.join(' ')}>It really works !</p>
 
         {/* do NOT use parenthesis because will execute immediately when React renders */}
         {/* the onclick event is the one triggering execution NOT the coder !! */}
@@ -123,4 +138,8 @@ class App extends Component {
   }
 }
 
-export default App;
+/* higher order component syntax
+    component wrapping an other compo
+    adding extra features
+*/
+export default App
