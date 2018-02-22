@@ -13,9 +13,11 @@ const person = (props) => {
     /* props are set from outside the component */
     return (
         <div className="Person">
+
             {/* can pass methods as property which might change state in another compo */}
             {/* in JSX, event name use camelCase, unlike in HTML */}
             <p onClick={props.click}>Mimi ni {props.name}, nina miaka {props.age} </p>
+            
             {/* children is reserved name: any elements between opening & closing tags */}
             {/* elements passed between tags when using component outside */}
             <p>{props.children}</p>
