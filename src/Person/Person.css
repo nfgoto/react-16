@@ -1,4 +1,3 @@
-/* GLOBAL styles */
 .Person {
     width: 60%;
     margin: 16px auto;
@@ -6,4 +5,10 @@
     box-shadow: 0 2px 3px #ccc;
     padding: 16px;
     text-align: center;
+}
+
+@media (min-width: 500px) {
+    .Person {
+        width: 450px;
+    }
 }

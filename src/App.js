@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import classes from './App.css';
 /* use uppercase names to differentiate from JSX tags */
 import Person from './Person/Person';
 
@@ -69,18 +69,9 @@ class App extends Component {
 
   /* When React rerenders, everything in render() gets executed */
   render = () => {
-    /* inline styles, scoped to the component in which used */
-    const style = {
-      /* this is a representation of CSS in JS */
-      backgoroundColor: 'green',
-      color: 'black',
-      font: 'inherit',
-      border: '1px solid black',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
+    
     let persons = null;
+    let btnClass = '';
 
     /* Conditional renderin of component */
     if (this.state.showPersons) {
@@ -104,30 +95,30 @@ class App extends Component {
         </div>
       );
 
-      style.backgoroundColor = 'red';
+      btnClass = classes.Red;
     }
 
     /* dynamic styling */
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
     /* use () to write multiline JSX */
     return (
       /* only one root element */
-      <div className="App">
+      <div className={classes.App}>
         <h1>Florian is building another React App!</h1>
-        <p className={classes.join(' ')}>It really works !</p>
+        <p className={assignedClasses.join(' ')}>It really works !</p>
 
         {/* do NOT use parenthesis because will execute immediately when React renders */}
         {/* the onclick event is the one triggering execution NOT the coder !! */}
         {/* to pass arguments when calling an event handler use bind() */}
         <button onClick={this.togglePersonsHandler}
-                style={style}>
+                className={btnClass}>
                 Toggle People
         </button>
 
@@ -138,8 +129,4 @@ class App extends Component {
   }
 }
 
-/* higher order component syntax
-    component wrapping an other compo
-    adding extra features
-*/
 export default App

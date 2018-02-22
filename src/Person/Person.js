@@ -2,7 +2,7 @@ import React from 'react';
 
 /* need to import css file because not included by  default until build */
 /* webpack handle the injection of the styles into rendered HTML */
-import './Person.css'
+import classes from './Person.css'
 
 /* this is a stateless functional component */
 /* you should prefer stateless components to class compo because more predictable */
@@ -14,7 +14,7 @@ const person = (props) => {
     /* use props attributes to add dynamic content when calling component */
     /* props are set from outside the component */
     return (
-        <div className="Person">
+        <div className={classes.Person}>
 
             {/* can pass methods as property which might change state in another compo */}
             {/* in JSX, event name use camelCase, unlike in HTML */}
