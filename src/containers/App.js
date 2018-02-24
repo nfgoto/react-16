@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
 import classes from './App.css';
-/* use uppercase names to differentiate from JSX tags */
-import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 /* components names by convention srart with uppercase */
@@ -64,49 +63,27 @@ class App extends Component {
   }
 
   togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons;
     this.setState({showPersons:!this.state.showPersons});
   }
 
   /* When React rerenders, everything in render() gets executed */
-  render = () => {
-    
+  render = () => {    
     let persons = null;
-    let btnClass = '';
 
     /* Conditional renderin of component */
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          <Persons  persons={this.state.persons}
-                    clicked={this.deletePersonHandler}
-                    changed={this.nameChangeHandler} />
-        </div>
-      );
-
-      btnClass = classes.Red;
-    }
-
-    /* dynamic styling */
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
+      persons = <Persons  persons={this.state.persons}
+                          clicked={this.deletePersonHandler}
+                          changed={this.nameChangeHandler} />;
     }
 
     return (
       /* only one root element */
       <div className={classes.App}>
-        <h1>Florian is building another React App!</h1>
-        <p className={assignedClasses.join(' ')}>It really works !</p>
-
-        <button onClick={this.togglePersonsHandler}
-                className={btnClass}>
-                Toggle People
-        </button>
-
+        <Cockpit  appTitle={this.props.appTitle}
+                  persons={this.state.persons}
+                  showPersons={this.state.showPersons}
+                  clicked={this.togglePersonsHandler} />
         {persons}      
       </div>
     );
