@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import classes from './App.css';
 /* use uppercase names to differentiate from JSX tags */
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 
 
 /* components names by convention srart with uppercase */
@@ -77,21 +78,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-        {/* Convert the array of persons state in valid JSX */}
-        {
-          this.state.persons.map((person, index) => {
-              return  (
-                        <Person name={person.name}  
-                                age={person.age}
-                                click={() => this.deletePersonHandler(index)}
-                                /* key attribute to allow React to keep track of elements to
-                                    rerender only those that changed */
-                                key={person.id} 
-                                /* manage events dynamically */
-                                changed={(event) => this.nameChangeHandler(event, person.id)}/>
-                      )
-            })
-        }
+          <Persons  persons={this.state.persons}
+                    clicked={this.deletePersonHandler}
+                    changed={this.nameChangeHandler} />
         </div>
       );
 
@@ -107,23 +96,18 @@ class App extends Component {
       assignedClasses.push(classes.bold);
     }
 
-    /* use () to write multiline JSX */
     return (
       /* only one root element */
       <div className={classes.App}>
         <h1>Florian is building another React App!</h1>
         <p className={assignedClasses.join(' ')}>It really works !</p>
 
-        {/* do NOT use parenthesis because will execute immediately when React renders */}
-        {/* the onclick event is the one triggering execution NOT the coder !! */}
-        {/* to pass arguments when calling an event handler use bind() */}
         <button onClick={this.togglePersonsHandler}
                 className={btnClass}>
                 Toggle People
         </button>
 
-        {persons}
-      
+        {persons}      
       </div>
     );
   }
