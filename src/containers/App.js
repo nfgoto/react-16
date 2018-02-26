@@ -7,19 +7,42 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 /* components names by convention srart with uppercase */
 class App extends Component {
+  constructor(props){
+    super(props);
+    console.log('[App.js] inside constructor(props)', props);
+    this.state = {
+      persons: [
+        { id: 'igf', name: 'Tatu', age: 32 },
+        { id: 'etre',name: 'Jomo', age: 51 },
+        { id: 'cu-',name: 'Malaika', age: 28 }
+      ],
+      showPersons: false
+    }; 
+  }
+
+
+  componentWillMount(){
+    console.log('[App.js] Inside componentWillMount()');
+  }
+
+
+  componentDidMount(){
+    console.log('[App.js] inside componentDidMount()');
+  }
+  
 
   /* state (reserved word) only available by components extending Component */
-  /* to set data to be used */
-  /* if state changes, React rerenders component */
   /* PATTERN: state manipulation only in containers (class-based component) like App  */
-  state = {
+  // ES6 syntax to initialize state
+  /* state = {
     persons: [
       { id: 'igf', name: 'Tatu', age: 32 },
       { id: 'etre',name: 'Jomo', age: 51 },
       { id: 'cu-',name: 'Malaika', age: 28 }
     ],
     showPersons: false
-  }
+  } */
+
 
   deletePersonHandler = (personIndex) => {
     /* ALWAYS update states in an IMMUTABLE way (create copy ) ! */
@@ -62,12 +85,15 @@ class App extends Component {
     this.setState({persons});
   }
 
+
   togglePersonsHandler = () => {
     this.setState({showPersons:!this.state.showPersons});
   }
 
+
   /* When React rerenders, everything in render() gets executed */
   render = () => {    
+    console.log('[App.js] inside render()');
     let persons = null;
 
     /* Conditional renderin of component */
