@@ -14,7 +14,7 @@ const cockpit = (props) => {
     /* dynamic styling */
     const assignedClasses = [];
     if (props.persons.length <= 2) {
-        assignedClasses.push(classes.red);
+        assignedClasses.push(classes.blue);
     }
     if (props.persons.length <= 1) {
         assignedClasses.push(classes.bold);
