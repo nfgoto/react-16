@@ -1,13 +1,15 @@
 import React from 'react';
-import classes from './Cockpit.css'
+import classes from './Cockpit.css';
+import Aux from '../../hoc/Aux';
 
 
 // every property on props object should be given a value when using component
 const cockpit = (props) => {
-    let btnClass = '';
+    let btnClass = classes.Button;
 
     if (props.showPersons) {
-        btnClass = classes.Red;    
+        // aggregating styles
+        btnClass = [classes.Button, classes.Red].join(' ');    
     }
     
 
@@ -21,7 +23,7 @@ const cockpit = (props) => {
     }
 
     return (
-        <div className={classes.Cockpit}>
+        <Aux>
             <h1>{props.appTitle}</h1>
             {/*  */}
             <p className={assignedClasses.join(' ')}>It really works !</p>
@@ -30,7 +32,7 @@ const cockpit = (props) => {
                     className={btnClass}>
                     Toggle People
             </button>
-        </div>
+        </Aux>
     );
 };
 
