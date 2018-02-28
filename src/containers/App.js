@@ -18,7 +18,8 @@ class App extends PureComponent {
         { id: 'etre',name: 'Jomo', age: 51 },
         { id: 'cu-',name: 'Malaika', age: 28 }
       ],
-      showPersons: false
+      showPersons: false,
+      toggleClicked: 0
     }; 
   }
 
@@ -111,14 +112,21 @@ class App extends PureComponent {
 
 
   togglePersonsHandler = () => {
-    this.setState({showPersons:!this.state.showPersons});
-  }
+    this.setState((prevState, props) => {
+      return {
+                showPersons:!this.state.showPersons, 
+                toggleClicked: prevState.toggleClicked + 1
+             };
+    })
+  };
 
 
   /* When React rerenders, everything in render() gets executed */
   render = () => {    
     console.log('[App.js] inside render()');
     let persons = null;
+
+    console.log('>>> Toggle clicked: ', this.state.toggleClicked);
 
     /* Conditional renderin of component */
     if (this.state.showPersons) {
