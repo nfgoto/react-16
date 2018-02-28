@@ -19,23 +19,25 @@ class Person extends Component {
 
     componentDidMount(){
             console.log('[Person.js] inside componentDidMount()');
+            // focus on first person because focuses on last element rendered
+            if (this.props.index === 0) {
+                this.inputElement.focus();
+            }
     }
 
     render() {
         console.log('[Person.js] Inside render()');
         return (
             <Aux>
-    
-                {/* can pass methods as property which might change state in another compo */}
-                {/* in JSX, event name use camelCase, unlike in HTML */}
+                {/* in JSX, event name use camelCase, unlike in HTML all lowercase */}
                 <p onClick={this.props.clicked}>Mimi ni {this.props.name}, nina miaka {this.props.age} </p>
-                
-                {/* children is reserved name: any elements between opening & closing tags */}
-                {/* elements passed between tags when using component outside */}
                 <p>{this.props.children}</p>
     
                 {/* onChange handler triggered when value in input changes */}
-                <input type="text" onChange={this.props.changed} value={this.props.name} />
+                <input  ref={(inputRef) => { this.inputElement = inputRef }}
+                        type="text"
+                        onChange={this.props.changed}
+                        value={this.props.name} />
             </Aux>
         );
     }
