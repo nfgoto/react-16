@@ -24,7 +24,7 @@ class Person extends Component {
     
                 {/* can pass methods as property which might change state in another compo */}
                 {/* in JSX, event name use camelCase, unlike in HTML */}
-                <p onClick={this.props.click}>Mimi ni {this.props.name}, nina miaka {this.props.age} </p>
+                <p onClick={this.props.clicked}>Mimi ni {this.props.name}, nina miaka {this.props.age} </p>
                 
                 {/* children is reserved name: any elements between opening & closing tags */}
                 {/* elements passed between tags when using component outside */}

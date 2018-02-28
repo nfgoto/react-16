@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
@@ -6,7 +6,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 
 /* components names by convention srart with uppercase */
-class App extends Component {
+class App extends PureComponent {
   constructor(props){
     super(props);
     console.log('[App.js] inside constructor(props)', props);
@@ -42,6 +42,28 @@ class App extends Component {
     ],
     showPersons: false
   } */
+
+// No #shouldComponentUpdate when extending PureComponent
+/*   shouldComponentUpdate(nextProps, nextState) {
+      console.log('[UPDATE App.js] inside #shouldComponentUpdate \n', 
+              nextProps, nextState);
+
+      // checking if state modified 
+      return nextState.persons !== this.state.persons ||
+              nextState.showPersons !== this.state.showPersons;
+  } */
+
+
+  componentWillUpdate(nextProps, nextState) {
+      console.log('[UPDATE App.js] inside #componentWillUpdate \n', 
+      nextProps, nextState);        
+  }
+
+
+  componentDidUpdate() {
+      console.log('[UPDATE App.js] inside #componentDidUpdate \n');
+  }
+
 
 
   deletePersonHandler = (personIndex) => {
@@ -106,6 +128,7 @@ class App extends Component {
     return (
       /* only one root element */
       <div className={classes.App}>
+        <button onClick={() => this.setState({showPersons: true}) }>Show People</button>
         <Cockpit  appTitle={this.props.appTitle}
                   persons={this.state.persons}
                   showPersons={this.state.showPersons}

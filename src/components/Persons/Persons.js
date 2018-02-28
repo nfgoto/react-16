@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person'
 
-class Persons extends Component {
+class Persons extends PureComponent {
         constructor(props) {
                 super(props);
                 console.log('[Persons.js] inside #constructor \n', props); 
@@ -21,15 +21,17 @@ class Persons extends Component {
                 console.log('[UPDATE Persons.js] inside #componentWillReceiveProps', nextProps);
         }
 
-
-        shouldComponentUpdate(nextProps, nextState) {
+       // No #shouldComponentUpdate when extending PureComponent
+      /*   shouldComponentUpdate(nextProps, nextState) {
                 console.log('[UPDATE Persons.js] inside #shouldComponentUpdate \n', 
                         nextProps, nextState);
 
-                // returns true because we create new persons array when upadting state
+                // returns true because update using IMMUTABILITY (to avoid side effects)
                 //      hence not same object reference
-                return nextProps.persons !== this.props.persons;
-        }
+                return nextProps.persons !== this.props.persons ||
+                        nextProps.clicked !== this.props.clicked ||
+                        nextProps.changed !== this.props.changed;
+        } */
 
 
         componentWillUpdate(nextProps, nextState) {
@@ -49,7 +51,7 @@ class Persons extends Component {
                         return  (
                                   <Person name={person.name}  
                                           age={person.age}
-                                          click={() => this.props.clicked(index)}
+                                          clicked={() => this.props.clicked(index)}
                                           key={person.id} 
                                           changed={(event) => this.props.changed(event, person.id)}/>
                                 );
