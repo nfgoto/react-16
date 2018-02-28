@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Person.css'
-import WithClass from '../../../hoc/WithClass';
+import Aux from '../../../hoc/Aux';
+import withClass from '../../../hoc/withClass';
 
 
 class Person extends Component {
@@ -21,7 +22,7 @@ class Person extends Component {
     render() {
         console.log('[Person.js] Inside render()');
         return (
-            <WithClass classes={classes.Person}>
+            <Aux>
     
                 {/* can pass methods as property which might change state in another compo */}
                 {/* in JSX, event name use camelCase, unlike in HTML */}
@@ -33,10 +34,10 @@ class Person extends Component {
     
                 {/* onChange handler triggered when value in input changes */}
                 <input type="text" onChange={this.props.changed} value={this.props.name} />
-            </WithClass>
+            </Aux>
         );
     }
 
 }
 
-export default Person;
+export default withClass(Person, classes.Person);
