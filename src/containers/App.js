@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 
 /* components names by convention srart with uppercase */
@@ -127,14 +128,14 @@ class App extends PureComponent {
 
     return (
       /* only one root element */
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <button onClick={() => this.setState({showPersons: true}) }>Show People</button>
         <Cockpit  appTitle={this.props.appTitle}
                   persons={this.state.persons}
                   showPersons={this.state.showPersons}
                   clicked={this.togglePersonsHandler} />
         {persons}      
-      </div>
+      </WithClass>
     );
   }
 }
